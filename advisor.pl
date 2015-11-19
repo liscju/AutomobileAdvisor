@@ -44,6 +44,12 @@ year_of_production(macerati_granTurismo,2008).
 year_of_production(ford_mustang,2006).
 year_of_production(volkswagen_passat,2005).
 
+engine_displacement(fiat_125p,1500).
+engine_displacement(fiat_126p,650).
+engine_displacement(macerati_granTurismo,4700).
+engine_displacement(ford_mustang,4600).
+engine_displacement(volkswagen_passat,1968).
+
 /**
  * Examples of different persons:
  * tom - sport car
