@@ -1,6 +1,6 @@
 :- module(advisor, []).
 
-% Database of Cars 
+% Database of Cars
 
 has_cost(fiat_125p,2000).
 has_cost(fiat_126p,1200).
@@ -62,22 +62,22 @@ is_car_cheap(Car) :-
 
 is_car_medium_prices(Car) :-
 	has_cost(Car, X),
-	X > 5000,
+	X >= 2000,
 	X =< 10000.
-	
+
 is_car_expensive(Car) :-
 	has_cost(Car, X),
 	X > 10000.
-	
+
 is_car_slow(Car) :-
 	has_power(Car, X),
 	X < 100.
-	
+
 is_car_mid_speed(Car) :-
 	has_power(Car, X),
 	X >= 100,
 	X =< 300.
-	
+
 is_car_fast(Car) :-
 	has_power(Car, X),
 	X > 300.
