@@ -85,28 +85,78 @@ is_car_fast(Car) :-
 is_car_old(Car) :-
 	year_of_production(Car, X),
 	X =< 1990.
-	
+
 is_car_has_mid_age(Car) :-
 	year_of_production(Car, X),
 	X > 1990,
 	X < 2005.
-	
+
 is_car_new(Car) :-
 	year_of_production(Car, X),
 	X >= 2005.
-	
+
 has_engine_low_displacement(Car) :-
 	engine_displacement(Car, X),
 	X < 2000.
-	
+
 has_engine_mid_displacement(Car) :-
 	engine_displacement(Car, X),
 	X >= 2000,
 	X =< 4000.
-	
+
 has_engine_high_displacement(Car) :-
 	engine_displacement(Car, X),
 	X > 4000.
 
-	
+
 % End of predicates about different car properties
+
+% Prdicates that connect client properties with cars
+
+is_car_suitable_for_client_age(young, Car) :-
+       is_car_new(Car).
+
+is_car_suitable_for_client_age(mid, Car).
+
+is_car_suitable_for_client_age(old, Car) :-
+	is_car_old(Car).
+
+is_car_suitable_for_client_money(poor, Car) :-
+	is_car_cheap(Car).
+
+is_car_suitable_for_client_money(mid, Car) :-
+	is_car_cheap(Car).
+
+is_car_suitable_for_client_money(mid, Car) :-
+	is_car_medium_prices(Car).
+
+is_car_suitable_for_client_money(rich, Car).
+
+is_car_suitable_for_client_family(single, Car).
+
+is_car_suitable_for_client_family(family_guy, Car) :-
+	has_seats(Car, X),
+	X >= 4.
+
+% End of predicates that connects client props with cars
+
+
+% Main method for finding appropriate Car for Client
+% Client is tuple of:
+% Age -> young, mid, old
+% Money -> poor, mid, rich
+% Family -> single, family_guy
+is_suitable_car(client(Age, Money, Family), Car) :-
+	is_car_suitable_for_client_age(Age, Car),
+	is_car_suitable_for_client_money(Money, Car),
+	is_car_suitable_for_client_family(Family, Car).
+
+
+
+
+
+
+
+
+
+
