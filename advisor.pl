@@ -69,23 +69,3 @@ is_type(fiat_125p,sedan).
 is_type(renault_kangoo,pick_up).
 is_type(mini_cooper,hatchback).
 is_type(jeep_grand_cheerokee,suv).
-
-/**
- * Examples of different persons:
- * tom - sport car
- * ela - city car
- * wojtek - family compact car
- * justyna - family medium car
- */
-is_single(tom).
-is_self_confident(tom).
-
-is_single(ela).
-needs_car_for_city(ela).
-
-not(is_single(wojtek)).
-has_small_family(wojtek).
-
-not(is_single(justyna)).
-has_medium_family(justyna).
-/** End of examples */
