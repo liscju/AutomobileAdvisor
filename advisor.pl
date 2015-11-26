@@ -1,5 +1,6 @@
 :- module(advisor, []).
 
+% Database of Cars 
 
 has_cost(fiat_125p,2000).
 has_cost(fiat_126p,1200).
@@ -50,3 +51,5 @@ is_type(fiat_125p,sedan).
 is_type(renault_kangoo,pick_up).
 is_type(mini_cooper,hatchback).
 is_type(jeep_grand_cheerokee,suv).
+
+% End of Car Database
