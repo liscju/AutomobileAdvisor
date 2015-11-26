@@ -53,3 +53,60 @@ is_type(mini_cooper,hatchback).
 is_type(jeep_grand_cheerokee,suv).
 
 % End of Car Database
+
+% Predicates about different car properties
+
+is_car_cheap(Car) :-
+	has_cost(Car, X),
+	X < 2000.
+
+is_car_medium_prices(Car) :-
+	has_cost(Car, X),
+	X > 5000,
+	X =< 10000.
+	
+is_car_expensive(Car) :-
+	has_cost(Car, X),
+	X > 10000.
+	
+is_car_slow(Car) :-
+	has_power(Car, X),
+	X < 100.
+	
+is_car_mid_speed(Car) :-
+	has_power(Car, X),
+	X >= 100,
+	X =< 300.
+	
+is_car_fast(Car) :-
+	has_power(Car, X),
+	X > 300.
+
+is_car_old(Car) :-
+	year_of_production(Car, X),
+	X =< 1990.
+	
+is_car_has_mid_age(Car) :-
+	year_of_production(Car, X),
+	X > 1990,
+	X < 2005.
+	
+is_car_new(Car) :-
+	year_of_production(Car, X),
+	X >= 2005.
+	
+has_engine_low_displacement(Car) :-
+	engine_displacement(Car, X),
+	X < 2000.
+	
+has_engine_mid_displacement(Car) :-
+	engine_displacement(Car, X),
+	X >= 2000,
+	X =< 4000.
+	
+has_engine_high_displacement(Car) :-
+	engine_displacement(Car, X),
+	X > 4000.
+
+	
+% End of predicates about different car properties
