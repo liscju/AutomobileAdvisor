@@ -18,7 +18,8 @@ if __name__ == "__main__":
 
     label=Label(top,text="How old are you?")
     label.pack()
-    
+
+    frame=Frame(top)
     age=IntVar()
     choices=[
             ("young",0),
@@ -28,14 +29,16 @@ if __name__ == "__main__":
 
     age.set(0)
     for text,i in choices:
-        b=Radiobutton(top,text=text,variable=age,value=i)
+        b=Radiobutton(frame,text=text,variable=age,value=i)
         b.pack(side=LEFT)
+    frame.pack()
 
     #age = ["young", "mid", "old"][int(input())]
 
     label=Label(top,text="How rich are you?")
     label.pack()
 
+    frame=Frame(top)
     money=IntVar()
     choices=[
         ("poor",0),
@@ -45,12 +48,14 @@ if __name__ == "__main__":
 
     money.set(0)
     for text,i in choices:
-        b=Radiobutton(top,text=text,variable=money,value=i)
+        b=Radiobutton(frame,text=text,variable=money,value=i)
         b.pack(side=LEFT)
-
+    frame.pack()
+    
     label=Label(top,text="What is your marital status?")
     label.pack()
 
+    frame=Frame(top)
     family=IntVar()
     choices=[
         ("single",0),
@@ -59,8 +64,9 @@ if __name__ == "__main__":
 
     family.set(0)
     for text,i in choices:
-        b=Ratiobutton(top,text=text,variable=family,value=i)
+        b=Radiobutton(frame,text=text,variable=family,value=i)
         b.pack(side=LEFT)
+    frame.pack()
     
     print "Jak bardzo jestes zamozny(wpisz numer)? 0 - biedny 1 - sredni 2 - bogaty"
     #money = ["poor", "mid", "rich"][int(input())]
