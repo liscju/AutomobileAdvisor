@@ -129,6 +129,10 @@ engine_displacement(kia_ceed,1400).
 engine_displacement(tarpan_honker,2500).
 
 is_type(fiat_125p,sedan).
+is_type(fiat_126p,hatchback).
+is_type(macerati_granTurismo,coupe).
+is_type(ford_mustang,coupe).
+is_type(volkswagen_passat,sedan).
 is_type(renault_kangoo,pick_up).
 is_type(mini_cooper,hatchback).
 is_type(jeep_grand_cheerokee,suv).
@@ -144,6 +148,8 @@ is_type(chrysler_voyager,van).
 is_type(bmw_3,sedan).
 is_type(kia_ceed,hatchback).
 is_type(tarpan_honker,pickup).
+
+has_name(fiat_125p,"Maluch (fiat 125p)").
 
 % End of Car Database
 
