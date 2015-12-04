@@ -79,55 +79,32 @@ if __name__ == "__main__":
     print "Program pomoze w wyborze odpowiedniego dla ciebie auta przy pomocy paru pytan"
     print "W jakim jestes wieku(wpisz numer)? 0 - mlody 1 - sredni 2 - podeszly"
 
-    label=Label(top,text="How old are you?")
-    label.pack()
+    age_query_text = "How old are you?"
+    age_choices = [
+            ("young", "young"),
+            ("mid", "mid"),
+            ("old", "old")
+    ]
+    age_var = StringVar()
+    create_information_frame(age_query_text, age_choices, age_var)
 
-    frame=Frame(top)
-    age=StringVar()
-    choices=[
-            ("young","young"),
-            ("mid","mid"),
-            ("old","old")
-        ]
-
-    age.set(0)
-    for text,i in choices:
-        b=Radiobutton(frame,text=text,variable=age,value=i)
-        b.pack(side=LEFT)
-    frame.pack()
-
-    label=Label(top,text="How rich are you?")
-    label.pack()
-
-    frame=Frame(top)
-    money=StringVar()
-    choices=[
+    money_query_txt = "How rich are you?"
+    money_choices=[
         ("poor","poor"),
         ("average","average"),
         ("rich","rich")
     ]
+    money_var=StringVar()
+    create_information_frame(money_query_txt, money_choices, money_var)
 
-    money.set(0)
-    for text,i in choices:
-        b=Radiobutton(frame,text=text,variable=money,value=i)
-        b.pack(side=LEFT)
-    frame.pack()
-    
-    label=Label(top,text="What is your marital status?")
-    label.pack()
-
-    frame=Frame(top)
-    family=StringVar()
-    choices=[
+    family_query_txt = "What is your marital status?"
+    family_choices=[
         ("single","single"),
         ("married","married")
         ]
+    family_var=StringVar()
+    create_information_frame(family_query_txt, family_choices, family_var)
 
-    family.set(0)
-    for text,i in choices:
-        b=Radiobutton(frame,text=text,variable=family,value=i)
-        b.pack(side=LEFT)
-    frame.pack()
     img_label = Label(top)
     img_label.pack()
 
@@ -138,10 +115,10 @@ if __name__ == "__main__":
         images=[]
         texts=[]
 
-        print age.get()
-        print money.get()
-        print family.get()
-        res = p.query(create_query(age.get(), money.get(), family.get()))
+        print age_var.get()
+        print money_var.get()
+        print family_var.get()
+        res = p.query(create_query(age_var.get(), money_var.get(), family_var.get()))
         for r in res:
             print(r["Car"])
             #XXX change if the text gets more sophisticated
