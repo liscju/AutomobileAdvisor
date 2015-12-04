@@ -21,10 +21,6 @@ class ResultsWatchWindow:
         textSecondPart=Label(master,text="Use arrow buttons to switch.")
         textFirstPart.pack()
         textSecondPart.pack()
-        #image
-        self.imageLabel=Label(master,image=self.images[self.akt])
-        img_label.image=self.images[self.akt]
-        self.imageLabel.pack()
         #Current image indicator
         self.currentImageLabel=Label(master,
                                 text=self.texts[self.akt]+" (image "+str(self.akt+1)+"/"+str(self.l)+")")
@@ -36,6 +32,10 @@ class ResultsWatchWindow:
         left.pack(side=LEFT)
         right.pack(side=LEFT)
         arrowsPanel.pack()
+        #image
+        self.imageLabel=Label(master,image=self.images[self.akt])
+        img_label.image=self.images[self.akt]
+        self.imageLabel.pack()
         
         
     def switchLeft(self):
