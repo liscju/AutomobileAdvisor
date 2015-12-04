@@ -2,11 +2,63 @@ __author__ = 'lee'
 
 from pyswip import Prolog
 from Tkinter import *
+from PIL import Image, ImageTk
 
 
 def create_query(age, money, family):
     return "advisor:is_suitable_car(client(%s, %s, %s), Car)." % (age, money, family)
 
+#window for viewing results
+class ResultsWatchWindow:
+    
+    def __init__(self,master,images,texts):
+        self.akt=0
+        self.l=len(images)
+        self.images=images
+        self.texts=texts
+        #text on top
+        textFirstPart=Label(master,text="Here is a list of suitable cars.")
+        textSecondPart=Label(master,text="Use arrow buttons to switch.")
+        textFirstPart.pack()
+        textSecondPart.pack()
+        #image
+        self.imageLabel=Label(master,image=self.images[self.akt])
+        label.image=self.images[self.akt]
+        self.imageLabel.pack()
+        #Current image indicator
+        self.currentImageLabel=Label(master,
+                                text=self.texts[self.akt]+" (image "+str(self.akt+1)+"/"+str(self.l)+")")
+        self.currentImageLabel.pack()
+        #arrows on bottom        
+        arrowsPanel=Frame(master)
+        left=Button(arrowsPanel,text="<---",command=self.switchLeft)
+        right=Button(arrowsPanel,text="--->",command=self.switchRight)
+        left.pack(side=LEFT)
+        right.pack(side=LEFT)
+        arrowsPanel.pack()
+        
+        
+    def switchLeft(self):
+        if self.akt==0:
+            self.akt=self.l-1
+        else:
+            self.akt=self.akt-1
+        self.imageLabel.configure(image=self.images[self.akt])
+        self.imageLabel.image=self.images[self.akt]
+        self.currentImageLabel.configure(
+            text=self.texts[self.akt]+" (image "+str(self.akt+1)+"/"+str(self.l)+")")
+
+    def switchRight(self):
+        if self.akt==self.l-1:
+            self.akt=0
+        else:
+            self.akt=self.akt+1
+        self.imageLabel.configure(image=self.images[self.akt])
+        self.imageLabel.image=self.images[self.akt]
+        self.currentImageLabel.configure(
+            text=self.texts[self.akt]+" (image "+str(self.akt+1)+"/"+str(self.l)+")")
+
+        
 if __name__ == "__main__":
     top = Tk()
 
@@ -20,11 +72,11 @@ if __name__ == "__main__":
     label.pack()
 
     frame=Frame(top)
-    age=IntVar()
+    age=StringVar()
     choices=[
-            ("young",0),
-            ("mid",1),
-            ("old",2)
+            ("young","young"),
+            ("mid","mid"),
+            ("old","old")
         ]
 
     age.set(0)
@@ -33,17 +85,15 @@ if __name__ == "__main__":
         b.pack(side=LEFT)
     frame.pack()
 
-    #age = ["young", "mid", "old"][int(input())]
-
     label=Label(top,text="How rich are you?")
     label.pack()
 
     frame=Frame(top)
-    money=IntVar()
+    money=StringVar()
     choices=[
-        ("poor",0),
-        ("average",1),
-        ("rich",2)
+        ("poor","poor"),
+        ("average","average"),
+        ("rich","rich")
     ]
 
     money.set(0)
@@ -56,10 +106,10 @@ if __name__ == "__main__":
     label.pack()
 
     frame=Frame(top)
-    family=IntVar()
+    family=StringVar()
     choices=[
-        ("single",0),
-        ("married",1)
+        ("single","single"),
+        ("married","married")
         ]
 
     family.set(0)
@@ -67,14 +117,42 @@ if __name__ == "__main__":
         b=Radiobutton(frame,text=text,variable=family,value=i)
         b.pack(side=LEFT)
     frame.pack()
-    
-    print "Jak bardzo jestes zamozny(wpisz numer)? 0 - biedny 1 - sredni 2 - bogaty"
-    #money = ["poor", "mid", "rich"][int(input())]
-    print "Jaki jest twoj stan cywilny(wpisz numer)? 0 - kawaler 1 - zonaty"
-    #family = ["single", "family_guy"][int(input())]
 
+    def callback():       
+        top.destroy()
+        newTop=Tk()
+        
+        images=[]
+        texts=[]
+
+        print age.get()
+        print money.get()
+        print family.get()
+        res = p.query(create_query(age.get(), money.get(), family.get()))
+        for r in res:
+            print(r["Car"])
+            #XXX change if the text gets more sophisticated
+            texts.append(r["Car"])
+            images.append(ImageTk.PhotoImage(Image.open("res/"+str(r["Car"])+".jpg")))
+            print "res/"+str(r["Car"])+".jpg"
+
+        akt=0
+        l=len(images)
+
+        if l>0:
+            resultsWatchWindow=ResultsWatchWindow(newTop,images,texts)
+        else:
+            text=Label(newTop,text="Sorry, but there is no suitable car for you.")
+            text.pack()
+        
+        #newTop.destroy()
+        
+
+    
+    button=Button(top,text="OK",command=callback)
+    button.pack()
+    
     top.mainloop()
-    print "Najodpowiedniejsze dla ciebie auta to:"
-    res = p.query(create_query(age, money, family))
-    for r in res:
-        print(r["Car"])
+
+
+    
