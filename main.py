@@ -63,7 +63,6 @@ def create_information_frame(query_txt, choices, var):
     label = Label(top, text=query_txt)
     label.pack()
     frame = Frame(top)
-    var.set(0)
     for text, i in choices:
         b = Radiobutton(frame, text=text, variable=var, value=i)
         b.pack(side=LEFT)
@@ -86,6 +85,7 @@ if __name__ == "__main__":
             ("old", "old")
     ]
     age_var = StringVar()
+    age_var.set(0)
     create_information_frame(age_query_text, age_choices, age_var)
 
     money_query_txt = "How rich are you?"
@@ -95,6 +95,7 @@ if __name__ == "__main__":
         ("rich","rich")
     ]
     money_var=StringVar()
+    money_var.set(0)
     create_information_frame(money_query_txt, money_choices, money_var)
 
     family_query_txt = "What is your marital status?"
@@ -103,6 +104,7 @@ if __name__ == "__main__":
         ("married","married")
         ]
     family_var=StringVar()
+    family_var.set(0)
     create_information_frame(family_query_txt, family_choices, family_var)
 
     location_query_txt = "What is your location?"
@@ -112,6 +114,7 @@ if __name__ == "__main__":
         ("village", "village")
     ]
     location_var = StringVar()
+    location_var.set(0)
     create_information_frame(location_query_txt, location_choice, location_var)
 
     likesfastcars_query_txt = "Do you want fast car?"
@@ -120,6 +123,7 @@ if __name__ == "__main__":
         ("yes", "yes")
     ]
     likesfastcars_var = StringVar()
+    likesfastcars_var.set(0)
     create_information_frame(likesfastcars_query_txt, likesfastcars_choice, likesfastcars_var)
 
     img_label = Label(top)
