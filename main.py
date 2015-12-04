@@ -58,7 +58,18 @@ class ResultsWatchWindow:
         self.currentImageLabel.configure(
             text=self.texts[self.akt]+" (image "+str(self.akt+1)+"/"+str(self.l)+")")
 
-        
+
+def create_information_frame(query_txt, choices, var):
+    label = Label(top, text=query_txt)
+    label.pack()
+    frame = Frame(top)
+    var.set(0)
+    for text, i in choices:
+        b = Radiobutton(frame, text=text, variable=var, value=i)
+        b.pack(side=LEFT)
+    frame.pack()
+
+
 if __name__ == "__main__":
     top = Tk()
 
