@@ -229,7 +229,8 @@ is_car_suitable_for_client_money(mid, Car) :-
 is_car_suitable_for_client_money(mid, Car) :-
 	is_car_medium_prices(Car).
 
-is_car_suitable_for_client_money(rich, Car).
+is_car_suitable_for_client_money(rich, Car) :-
+	is_car_expensive(Car).
 
 is_car_suitable_for_client_family(single, Car).
 
