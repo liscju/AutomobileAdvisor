@@ -237,6 +237,27 @@ is_car_suitable_for_client_family(family_guy, Car) :-
 	has_seats(Car, X),
 	X >= 4.
 
+is_car_suitable_for_client_location(smallcity, Car) :-
+	is_car_cheap(Car).
+
+is_car_suitable_for_client_location(smallCity, Car) :-
+	is_car_medium_prices(Car).
+
+is_car_suitable_for_client_location(bigcity, Car) :-
+	is_car_medium_prices(Car).
+
+is_car_suitable_for_client_location(bigcity, Car) :-
+	is_car_expensive(Car).
+
+is_car_suitable_for_client_location(village, Car) :-
+	is_type(Car, minibus).
+
+is_car_suitable_for_client_location(village, Car) :-
+	is_type(Car, sedan).
+
+is_car_suitable_for_client_location(village, Car) :-
+	is_type(Car, suv).
+
 % End of predicates that connects client props with cars
 
 
@@ -245,10 +266,12 @@ is_car_suitable_for_client_family(family_guy, Car) :-
 % Age -> young, mid, old
 % Money -> poor, mid, rich
 % Family -> single, family_guy
-is_suitable_car(client(Age, Money, Family), Car) :-
+% Location -> smallcity, bigcity, village.
+is_suitable_car(client(Age, Money, Family, Location), Car) :-
 	is_car_suitable_for_client_age(Age, Car),
 	is_car_suitable_for_client_money(Money, Car),
-	is_car_suitable_for_client_family(Family, Car).
+	is_car_suitable_for_client_family(Family, Car),
+	is_car_suitable_for_client_location(Location, Car).
 
 
 
