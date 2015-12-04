@@ -259,6 +259,11 @@ is_car_suitable_for_client_location(village, Car) :-
 is_car_suitable_for_client_location(village, Car) :-
 	is_type(Car, suv).
 
+is_car_suitable_for_client_likesfastcars(dontcare, Car).
+
+is_car_suitable_for_client_likesfastcars(yes, Car) :-
+	is_car_fast(Car).
+
 % End of predicates that connects client props with cars
 
 
@@ -268,11 +273,13 @@ is_car_suitable_for_client_location(village, Car) :-
 % Money -> poor, mid, rich
 % Family -> single, family_guy
 % Location -> smallcity, bigcity, village.
-is_suitable_car(client(Age, Money, Family, Location), Car) :-
+% LikesFastCars -> dontcare, yes
+is_suitable_car(client(Age, Money, Family, Location, LikesFastCars), Car) :-
 	is_car_suitable_for_client_age(Age, Car),
 	is_car_suitable_for_client_money(Money, Car),
 	is_car_suitable_for_client_family(Family, Car),
-	is_car_suitable_for_client_location(Location, Car).
+	is_car_suitable_for_client_location(Location, Car),
+	is_car_suitable_for_client_likesfastcars(LikesFastCars, Car).
 
 
 

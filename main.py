@@ -5,8 +5,9 @@ from Tkinter import *
 from PIL import Image, ImageTk
 
 
-def create_query(age, money, family, location):
-    return "advisor:is_suitable_car(client(%s, %s, %s, %s), Car)." % (age, money, family, location)
+def create_query(age, money, family, location, likesfastcars):
+    return "advisor:is_suitable_car(client(%s, %s, %s, %s, %s), Car)." % (age, money, family, location,
+                                                                          likesfastcars)
 
 #window for viewing results
 class ResultsWatchWindow:
@@ -114,6 +115,14 @@ if __name__ == "__main__":
     location_var = StringVar()
     create_information_frame(location_query_txt, location_choice, location_var)
 
+    likesfastcars_query_txt = "Do you want fast car?"
+    likesfastcars_choice = [
+        ("dontcare", "dontcare"),
+        ("yes", "yes")
+    ]
+    likesfastcars_var = StringVar()
+    create_information_frame(likesfastcars_query_txt, likesfastcars_choice, likesfastcars_var)
+
     img_label = Label(top)
     img_label.pack()
 
@@ -127,7 +136,8 @@ if __name__ == "__main__":
         print age_var.get()
         print money_var.get()
         print family_var.get()
-        res = p.query(create_query(age_var.get(), money_var.get(), family_var.get(), location_var.get()))
+        res = p.query(create_query(age_var.get(), money_var.get(), family_var.get(), location_var.get(),
+                                   likesfastcars_var.get()))
         for r in res:
             print(r["Car"])
             #XXX change if the text gets more sophisticated
