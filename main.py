@@ -1,4 +1,3 @@
-__author__ = 'lee'
 
 from pyswip import Prolog
 from Tkinter import *
