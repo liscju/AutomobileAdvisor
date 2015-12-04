@@ -23,7 +23,7 @@ class ResultsWatchWindow:
         textSecondPart.pack()
         #image
         self.imageLabel=Label(master,image=self.images[self.akt])
-        label.image=self.images[self.akt]
+        img_label.image=self.images[self.akt]
         self.imageLabel.pack()
         #Current image indicator
         self.currentImageLabel=Label(master,
@@ -128,6 +128,8 @@ if __name__ == "__main__":
         b=Radiobutton(frame,text=text,variable=family,value=i)
         b.pack(side=LEFT)
     frame.pack()
+    img_label = Label(top)
+    img_label.pack()
 
     def callback():       
         top.destroy()
